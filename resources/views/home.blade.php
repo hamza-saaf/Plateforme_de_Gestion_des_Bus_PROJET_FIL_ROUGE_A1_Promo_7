@@ -17,14 +17,15 @@
     <!-- Navbar -->
     <nav class="bg-blue-700 border-gray-200 px-4 lg:px-6 py-3 shadow-md">
         <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
-            <a href="#" class="flex items-center">
-                <i class="fas fa-bus text-white text-2xl mr-3"></i>
+            <a href="/" class="flex items-center">
+                <img src="../../public/BusFlowLogo.png" alt="busflow_logo">
                 <span class="self-center text-xl font-semibold whitespace-nowrap text-white">BusFlow</span>
             </a>
             <div class="flex items-center lg:order-2">
+                
                 <a href="{{ route('login') }}"
                     class="text-white hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none">Connexion</a>
-                <a href="{{ route('register') }}"
+                <a href=""
                     class="text-blue-700 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 focus:outline-none">Inscription</a>
                 <button data-collapse-toggle="mobile-menu-2" type="button"
                     class="inline-flex items-center p-2 ml-1 text-sm text-white rounded-lg lg:hidden hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-300"
@@ -85,7 +86,8 @@
                             class="px-6 py-3 bg-white text-blue-700 hover:bg-gray-100 rounded-lg font-medium flex items-center">
                             <i class="fas fa-search mr-2"></i> Chercher un trajet
                         </a>
-                        <a href="{{ route('register') }}"
+                        {{-- {{ route('register') }} --}}
+                        <a href=""
                             class="px-6 py-3 bg-transparent border-2 border-white text-white hover:bg-blue-800 rounded-lg font-medium flex items-center">
                             <i class="fas fa-user-plus mr-2"></i> Créer un compte
                         </a>
@@ -107,8 +109,8 @@
         <div class="max-w-screen-xl mx-auto">
             <div class="bg-white rounded-xl shadow-md p-6">
                 <h2 class="text-2xl font-bold text-center mb-6 text-gray-800">Rechercher un trajet</h2>
-
-                <form method="GET" action="{{ route('search.trips') }}" class="grid gap-6 md:grid-cols-4">
+                {{-- {{ route('search.trips') }} --}}
+                <form method="GET" action="" class="grid gap-6 md:grid-cols-4">
                     <div>
                         <label for="departure" class="block mb-2 text-sm font-medium text-gray-700">Départ</label>
                         <div class="relative">
@@ -164,7 +166,7 @@
                 </a>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {{-- <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach ($popularRoutes as $route)
                     <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
                         <div class="p-5">
@@ -209,7 +211,7 @@
                         <p class="text-gray-500 text-xl">Aucun trajet populaire à afficher pour le moment.</p>
                     </div>
                 @endif
-            </div>
+            </div> --}}
         </div>
     </section>
 
