@@ -13,9 +13,9 @@ class CreateTrajetsTable extends Migration
      */
     public function up()
     {
-        Schema::create('trips', function (Blueprint $table) {
+        Schema::create('trajets', function (Blueprint $table) {
             $table->id();
-            $table->string('start_location');
+            $table->string('depart');
             $table->string('destination');
             $table->date('date');
             $table->decimal('price', 8, 2);

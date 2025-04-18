@@ -10,7 +10,7 @@
 <body class="bg-gray-50">
     <div class="min-h-screen flex items-center justify-center px-4 py-8">
         <div class="max-w-md w-full bg-white shadow-xl rounded-xl overflow-hidden">
-            <div class="bg-blue-700 p-6 text-center">
+            <div class="bg-slate-700 p-6 text-center">
                 <i class="fas fa-bus text-white text-4xl mb-4"></i>
                 <h2 class="text-2xl font-bold text-white">Connexion à BusFlow</h2>
             </div>
@@ -32,7 +32,7 @@
                             required 
                             autocomplete="email"
                             placeholder="votre.email@exemple.com"
-                            class="pl-10 block w-full border border-gray-300 rounded-lg shadow-sm py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('email') border-red-500 @enderror"
+                            class="pl-10 block w-full border border-gray-300 rounded-lg shadow-sm py-2 px-4 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-slate-500 @error('email') border-red-500 @enderror"
                             value="{{ old('email') }}"
                         >
                         @error('email')
@@ -55,7 +55,7 @@
                             required 
                             autocomplete="current-password"
                             placeholder="••••••••"
-                            class="pl-10 block w-full border border-gray-300 rounded-lg shadow-sm py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 @error('password') border-red-500 @enderror"
+                            class="pl-10 block w-full border border-gray-300 rounded-lg shadow-sm py-2 px-4 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-slate-500 @error('password') border-red-500 @enderror"
                         >
                         @error('password')
                             <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
@@ -70,7 +70,7 @@
                             type="checkbox" 
                             name="remember" 
                             id="remember" 
-                            class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                            class="h-4 w-4 text-slate-600 focus:ring-slate-500 border-gray-300 rounded"
                         >
                         <label for="remember" class="ml-2 block text-sm text-gray-900">
                             Se souvenir de moi
@@ -79,7 +79,7 @@
 
                     <div class="text-sm">
                         {{-- {{ route('password.request') }} --}}
-                        <a href="" class="font-medium text-blue-600 hover:text-blue-500">
+                        <a href="" class="font-medium text-slate-600 hover:text-slate-500">
                             Mot de passe oublié ?
                         </a>
                     </div>
@@ -89,7 +89,7 @@
                 <div>
                     <button 
                         type="submit" 
-                        class="w-full flex justify-center py-2 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                        class="w-full flex justify-center py-2 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-slate-600 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500"
                     >
                         Se connecter
                     </button>
@@ -141,7 +141,7 @@
                 <p class="mt-2 text-sm text-gray-600">
                     Pas encore de compte ? 
                     {{-- {{ route('register') }} --}}
-                    <a href="" class="font-medium text-blue-600 hover:text-blue-500">
+                    <a href="" class="font-medium text-slate-600 hover:text-slate-500">
                         Créez un compte
                     </a>
                 </p>

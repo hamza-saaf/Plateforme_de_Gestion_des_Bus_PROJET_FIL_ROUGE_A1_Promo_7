@@ -15,20 +15,19 @@
 
 <body class="bg-gray-50">
     <!-- Navbar -->
-    <nav class="bg-blue-700 border-gray-200 px-4 lg:px-6 py-3 shadow-md">
+    <nav class="bg-slate-500 border-gray-200 px-4 lg:px-6 py-3 shadow-md">
         <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
             <a href="/" class="flex items-center">
-                <img src="../../public/BusFlowLogo.png" alt="busflow_logo">
-                <span class="self-center text-xl font-semibold whitespace-nowrap text-white">BusFlow</span>
+                <img src="{{ asset('img/BusFlow_300_px2.png') }}" alt="iPhone" class="w-60 rounded-sm">
             </a>
             <div class="flex items-center lg:order-2">
-                
+
                 <a href="{{ route('login') }}"
-                    class="text-white hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none">Connexion</a>
+                    class="text-white hover:bg-slate-800 focus:ring-4 focus:ring-slate-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none">Connexion</a>
                 <a href=""
-                    class="text-blue-700 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 focus:outline-none">Inscription</a>
+                    class="text-slate-700 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-slate-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 focus:outline-none">Inscription</a>
                 <button data-collapse-toggle="mobile-menu-2" type="button"
-                    class="inline-flex items-center p-2 ml-1 text-sm text-white rounded-lg lg:hidden hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-300"
+                    class="inline-flex items-center p-2 ml-1 text-sm text-white rounded-lg lg:hidden hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-300"
                     aria-controls="mobile-menu-2" aria-expanded="false">
                     <span class="sr-only">Ouvrir le menu</span>
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -48,25 +47,25 @@
                 <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
                     <li>
                         <a href="#"
-                            class="block py-2 pr-4 pl-3 text-white border-b border-blue-600 lg:border-0 lg:hover:text-blue-200 lg:p-0"
+                            class="block py-2 pr-4 pl-3 text-white border-b border-slate-600 lg:border-0 lg:hover:text-slate-200 lg:p-0"
                             aria-current="page">Accueil</a>
                     </li>
                     <li>
                         <a href="#"
-                            class="block py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-blue-800 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-200 lg:p-0">Trajets</a>
+                            class="block py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-slate-800 lg:hover:bg-transparent lg:border-0 lg:hover:text-slate-200 lg:p-0">Trajets</a>
                     </li>
                     <li>
                         <a href="#"
-                            class="block py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-blue-800 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-200 lg:p-0">Services</a>
+                            class="block py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-slate-800 lg:hover:bg-transparent lg:border-0 lg:hover:text-slate-200 lg:p-0">Services</a>
                     </li>
                     <li>
                         <a href="#"
-                            class="block py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-blue-800 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-200 lg:p-0">À
+                            class="block py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-slate-800 lg:hover:bg-transparent lg:border-0 lg:hover:text-slate-200 lg:p-0">À
                             propos</a>
                     </li>
                     <li>
                         <a href="#"
-                            class="block py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-blue-800 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-200 lg:p-0">Contact</a>
+                            class="block py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-slate-800 lg:hover:bg-transparent lg:border-0 lg:hover:text-slate-200 lg:p-0">Contact</a>
                     </li>
                 </ul>
             </div>
@@ -74,7 +73,7 @@
     </nav>
 
     <!-- Hero Section with Search Form -->
-    <section class="bg-blue-700 bg-gradient-to-br from-blue-700 to-blue-900 py-16">
+    <section class="bg-slate-500 bg-gradient-to-br from-slate-700 to-slate-900 py-16">
         <div class="max-w-screen-xl mx-auto px-4">
             <div class="grid md:grid-cols-2 gap-8 items-center">
                 <div class="text-white">
@@ -82,20 +81,20 @@
                     <p class="text-xl mb-8">Planifiez, réservez et gérez vos trajets en un clic. BusFlow rend vos
                         voyages plus faciles et plus agréables.</p>
                     <div class="flex space-x-4">
-                        <a href="#search"
-                            class="px-6 py-3 bg-white text-blue-700 hover:bg-gray-100 rounded-lg font-medium flex items-center">
+                        <a href="search"
+                            class="px-6 py-3 bg-white text-slate-700 hover:bg-gray-100 rounded-lg font-medium flex items-center">
                             <i class="fas fa-search mr-2"></i> Chercher un trajet
                         </a>
                         {{-- {{ route('register') }} --}}
                         <a href=""
-                            class="px-6 py-3 bg-transparent border-2 border-white text-white hover:bg-blue-800 rounded-lg font-medium flex items-center">
+                            class="px-6 py-3 bg-transparent border-2 border-white text-white hover:bg-slate-800 rounded-lg font-medium flex items-center">
                             <i class="fas fa-user-plus mr-2"></i> Créer un compte
                         </a>
                     </div>
                 </div>
                 <div class="relative hidden md:block">
                     <img src="/api/placeholder/600/400" alt="Bus moderne" class="rounded-lg shadow-xl">
-                    <div class="absolute -bottom-6 -right-6 bg-blue-600 text-white p-4 rounded-lg shadow-lg">
+                    <div class="absolute -bottom-6 -right-6 bg-slate-600 text-white p-4 rounded-lg shadow-lg">
                         <div class="text-lg font-bold">+ de 500</div>
                         <div class="text-sm">Trajets quotidiens</div>
                     </div>
@@ -109,17 +108,19 @@
         <div class="max-w-screen-xl mx-auto">
             <div class="bg-white rounded-xl shadow-md p-6">
                 <h2 class="text-2xl font-bold text-center mb-6 text-gray-800">Rechercher un trajet</h2>
-                {{-- {{ route('search.trips') }} --}}
-                <form method="GET" action="" class="grid gap-6 md:grid-cols-4">
+
+                <form id="search-form" method="GET" action="{{ route('search') }}" class="grid gap-6 md:grid-cols-4">
                     <div>
-                        <label for="departure" class="block mb-2 text-sm font-medium text-gray-700">Départ</label>
+                        <label for="depart" class="block mb-2 text-sm font-medium text-gray-700">Départ</label>
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                <i class="fas fa-map-marker-alt text-blue-600"></i>
+                                <i class="fas fa-map-marker-alt text-slate-600"></i>
                             </div>
-                            <input type="text" id="departure" name="departure"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
+                            <input type="text" id="depart" name="depart"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-slate-500 focus:border-slate-500 block w-full pl-10 p-2.5"
                                 placeholder="Ville de départ" required>
+                            <p class="mt-1 text-sm text-red-600 error-message" data-error="depart"></p>
+
                         </div>
                     </div>
                     <div>
@@ -127,27 +128,29 @@
                             class="block mb-2 text-sm font-medium text-gray-700">Destination</label>
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                <i class="fas fa-map-marker text-blue-600"></i>
+                                <i class="fas fa-map-marker text-slate-600"></i>
                             </div>
                             <input type="text" id="destination" name="destination"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-slate-500 focus:border-slate-500 block w-full pl-10 p-2.5"
                                 placeholder="Ville d'arrivée" required>
+                            <p class="mt-1 text-sm text-red-600 error-message" data-error="destination"></p>
                         </div>
                     </div>
                     <div>
                         <label for="date" class="block mb-2 text-sm font-medium text-gray-700">Date</label>
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                <i class="fas fa-calendar text-blue-600"></i>
+                                <i class="fas fa-calendar text-slate-600"></i>
                             </div>
                             <input type="date" id="date" name="date"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
-                                required>
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-slate-500 focus:border-slate-500 block w-full pl-10 p-2.5"
+                               >
+
                         </div>
                     </div>
                     <div class="flex items-end">
                         <button type="submit"
-                            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-5 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-300">
+                            class="w-full bg-slate-600 hover:bg-slate-700 text-white font-medium py-2.5 px-5 rounded-lg focus:outline-none focus:ring-4 focus:ring-slate-300">
                             <i class="fas fa-search mr-2"></i> Rechercher
                         </button>
                     </div>
@@ -155,13 +158,29 @@
             </div>
         </div>
     </section>
-
+    <div id="search-results" class="searchBox  max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+        @include('trajet_results', ['trajets' => $trajets ?? []])
+    </div>
+    {{-- <div class="Resutat_de_recherch">
+            <h3>Resultat</h3>
+            @foreach ($trajets as $trajet)
+                <div>
+                    <ul>
+                        <li>Depart:{{ $trajet->depart }}</li>
+                        <li>Destination:{{ $trajet->destination }}</li>
+                        <li>Date:{{ $trajet->date }}</li>
+                        <li>Prix:{{ $trajet->price }} DH</li>
+                    </ul>
+                </div>
+            @endforeach
+        </div> --}}
     <!-- Featured Routes -->
     <section class="py-12 bg-gray-50 px-4">
         <div class="max-w-screen-xl mx-auto">
             <div class="flex justify-between items-center mb-8">
                 <h2 class="text-2xl font-bold text-gray-800">Trajets populaires</h2>
-                <a href="#" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
+                <a href="{{ route('trajetsPopulaires') }}"
+                    class="text-slate-600 hover:text-slate-800 font-medium flex items-center">
                     Voir plus <i class="fas fa-arrow-right ml-2"></i>
                 </a>
             </div>
@@ -176,7 +195,7 @@
                                         {{ $route->destination }}</h3>
                                     <p class="text-gray-600">{{ $route->duration }} min</p>
                                 </div>
-                                <div class="text-xl font-bold text-blue-600">{{ $route->price }} €</div>
+                                <div class="text-xl font-bold text-slate-600">{{ $route->price }} €</div>
                             </div>
                             <div class="flex justify-between text-sm text-gray-500 mb-4">
                                 <div>
@@ -184,7 +203,7 @@
                                     <div>{{ $route->departure_time }}</div>
                                 </div>
                                 <div class="text-center">
-                                    <i class="fas fa-bus text-blue-600"></i>
+                                    <i class="fas fa-bus text-slate-600"></i>
                                 </div>
                                 <div class="text-right">
                                     <div class="font-medium">Arrivée</div>
@@ -198,7 +217,7 @@
                                         disponibles</span>
                                 </div>
                                 <a href="{{ route('trips.show', $route->id) }}"
-                                    class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm">Réserver</a>
+                                    class="px-4 py-2 bg-slate-600 hover:bg-slate-700 text-white rounded-lg text-sm">Réserver</a>
                             </div>
                         </div>
                     </div>
@@ -223,36 +242,36 @@
                 voyage optimale avec des fonctionnalités uniques et innovantes.</p>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="bg-blue-50 p-6 rounded-lg text-center">
-                    <div class="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-map-marked-alt text-blue-600 text-2xl"></i>
+                <div class="bg-slate-50 p-6 rounded-lg text-center">
+                    <div class="bg-slate-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-map-marked-alt text-slate-600 text-2xl"></i>
                     </div>
                     <h3 class="text-lg font-semibold mb-2 text-gray-800">Géolocalisation</h3>
                     <p class="text-gray-600">Suivez votre bus en temps réel et visualisez votre itinéraire sur une
                         carte interactive.</p>
                 </div>
 
-                <div class="bg-blue-50 p-6 rounded-lg text-center">
-                    <div class="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-bell text-blue-600 text-2xl"></i>
+                <div class="bg-slate-50 p-6 rounded-lg text-center">
+                    <div class="bg-slate-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-bell text-slate-600 text-2xl"></i>
                     </div>
                     <h3 class="text-lg font-semibold mb-2 text-gray-800">Notifications</h3>
                     <p class="text-gray-600">Recevez des alertes en temps réel pour les retards, changements d'horaires
                         ou d'itinéraires.</p>
                 </div>
 
-                <div class="bg-blue-50 p-6 rounded-lg text-center">
-                    <div class="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-chair text-blue-600 text-2xl"></i>
+                <div class="bg-slate-50 p-6 rounded-lg text-center">
+                    <div class="bg-slate-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-chair text-slate-600 text-2xl"></i>
                     </div>
                     <h3 class="text-lg font-semibold mb-2 text-gray-800">Choix du siège</h3>
                     <p class="text-gray-600">Sélectionnez votre siège préféré grâce à notre interface de réservation
                         visuelle.</p>
                 </div>
 
-                <div class="bg-blue-50 p-6 rounded-lg text-center">
-                    <div class="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-cloud-sun text-blue-600 text-2xl"></i>
+                <div class="bg-slate-50 p-6 rounded-lg text-center">
+                    <div class="bg-slate-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-cloud-sun text-slate-600 text-2xl"></i>
                     </div>
                     <h3 class="text-lg font-semibold mb-2 text-gray-800">Météo intégrée</h3>
                     <p class="text-gray-600">Consultez les prévisions météorologiques pour chaque étape de votre
@@ -306,7 +325,7 @@
                 <div class="relative mx-auto md:ml-auto">
                     <img src="/api/placeholder/300/600" alt="Application mobile BusFlow"
                         class="rounded-xl shadow-xl mx-auto">
-                    <div class="absolute -bottom-4 -left-4 bg-blue-600 text-white p-4 rounded-lg shadow-lg">
+                    <div class="absolute -bottom-4 -left-4 bg-slate-600 text-white p-4 rounded-lg shadow-lg">
                         <div class="text-lg font-bold">4.8/5</div>
                         <div class="text-sm">Note utilisateurs</div>
                     </div>
@@ -384,18 +403,18 @@
     </section>
 
     <!-- Newsletter -->
-    <section class="py-12 bg-blue-700 px-4">
+    <section class="py-12 bg-slate-700 px-4">
         <div class="max-w-screen-xl mx-auto text-center">
             <h2 class="text-2xl font-bold mb-4 text-white">Restez informé des nouvelles fonctionnalités</h2>
-            <p class="text-blue-100 mb-8 max-w-2xl mx-auto">Inscrivez-vous à notre newsletter pour recevoir nos
+            <p class="text-slate-100 mb-8 max-w-2xl mx-auto">Inscrivez-vous à notre newsletter pour recevoir nos
                 actualités, les nouveaux itinéraires et des offres exclusives.</p>
 
             <form class="flex flex-col md:flex-row gap-4 max-w-md mx-auto">
                 <input type="email"
-                    class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-slate-500 focus:border-slate-500 block w-full p-2.5"
                     placeholder="Votre adresse email" required>
                 <button type="submit"
-                    class="bg-blue-900 hover:bg-blue-800 text-white font-medium py-2.5 px-5 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-300 whitespace-nowrap">S'abonner</button>
+                    class="bg-slate-900 hover:bg-slate-800 text-white font-medium py-2.5 px-5 rounded-lg focus:outline-none focus:ring-4 focus:ring-slate-300 whitespace-nowrap">S'abonner</button>
             </form>
         </div>
     </section>
@@ -449,7 +468,7 @@
                         </li>
                         <li class="flex items-start">
                             <i class="fas fa-phone-alt mt-1 mr-3"></i>
-                            <span>+33 1 23 45 67 89</span>
+                            <span>+212650200682</span>
                         </li>
                         <li class="flex items-start">
                             <i class="fas fa-envelope mt-1 mr-3"></i>
@@ -464,6 +483,31 @@
             </div>
         </div>
     </footer>
+    <script>
+        document.getElementById('search-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const form = e.target;
+            const formData = new FormData(form);
+            const params = new URLSearchParams(formData).toString();
+
+            fetch(form.action + '?' + params, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.html) {
+                        document.getElementById('search-results').innerHTML = data.html;
+                    } else if (data.errors) {
+                        const errors = Object.values(data.errors).flat().join('\n');
+                        console('Validation failed:\n' + errors);
+                    }
+                });
+        });
+    </script>
+
 </body>
 
 </html>
