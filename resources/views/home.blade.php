@@ -501,6 +501,7 @@
                     if (data.html) {
                         document.getElementById('search-results').innerHTML = data.html;
                     } else if (data.errors) {
+                        
                         const errors = Object.values(data.errors).flat().join('\n');
                         console('Validation failed:\n' + errors);
                     }

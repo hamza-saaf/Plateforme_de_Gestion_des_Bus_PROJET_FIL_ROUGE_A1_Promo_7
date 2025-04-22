@@ -25,3 +25,6 @@ Route::get('login', function () {
 Route::get('trajetsPopulaires', function () {
     return view('trajetsPopulaires');
 })->name('trajetsPopulaires');
+Route::get('dashboard', function () {
+    return view('Admin.dashboard');
+})->name('dashboard');
