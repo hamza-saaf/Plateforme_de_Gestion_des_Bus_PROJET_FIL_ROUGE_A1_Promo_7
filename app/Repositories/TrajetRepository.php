@@ -44,11 +44,9 @@ class TrajetRepository implements TrajetRepositoryInterface
 
     public function getPopularRoutes()
     {
-        return Trajet::select('trajets.*', DB::raw('COUNT(bookings.id) as booking_count'))
-            ->leftJoin('bookings', 'trajets.id', '=', 'bookings.trajet_id')
-            ->groupBy('trajets.id')
-            ->orderByDesc('booking_count')
-            ->limit(6)
+        return Trajet::where('date', '>=', now())
+            ->orderBy('date')
+            ->take(6)
             ->get();
     }
 }

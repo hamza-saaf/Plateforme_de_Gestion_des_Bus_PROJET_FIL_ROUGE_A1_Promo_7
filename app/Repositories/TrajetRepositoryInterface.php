@@ -8,4 +8,5 @@ interface TrajetRepositoryInterface {
     public function update($id, array $data);
     public function destroy($id);
     public function search(array $filters);
+    public function getPopularRoutes();
 }

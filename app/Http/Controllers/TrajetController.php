@@ -17,7 +17,7 @@ class TrajetController extends Controller
     public function index()
     {
         $trajets = $this->trajetRepo->all();
-        return view('trajets.index', compact('trajets'));
+        return view('Admin.gestion_des_trajets', compact('trajets'));
     }
 
     public function popular()
@@ -34,16 +34,28 @@ class TrajetController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'depart' => 'required|string|max:100',
-            'destination' => 'required|string|max:100',
-            'date' => 'required|date|after_or_equal:today',
-            'price' => 'required|numeric|min:0',
-            'available_seats' => 'required|integer|min:1',
-        ]);
+        try {
+            $data = $request->validate([
+                'depart' => 'required|string|max:100',
+                'destination' => 'required|string|max:100',
+                'date' => 'required|date|after_or_equal:today',
+                'price' => 'required|numeric|min:0',
+                'available_seats' => 'required|integer|min:1',
+            ]);
 
-        $this->trajetRepo->store($data);
-        return redirect()->back()->with('success', 'Trajet ajouté avec succès!');
+            $this->trajetRepo->store($data);
+
+            if ($request->expectsJson()) {
+                return response()->json(['success' => true]);
+            }
+            
+            return redirect()->back()->with('success', 'Trajet ajouté avec succès!');
+        } catch (\Exception $e) {
+            if ($request->expectsJson()) {
+                return response()->json(['success' => false, 'message' => $e->getMessage()], 422);
+            }
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
     }
 
     public function edit($id)
@@ -54,22 +66,38 @@ class TrajetController extends Controller
 
     public function update(Request $request, $id)
     {
-        $data = $request->validate([
-            'depart' => 'required|string|max:100',
-            'destination' => 'required|string|max:100',
-            'date' => 'required|date|after_or_equal:today',
-            'price' => 'required|numeric|min:0',
-            'available_seats' => 'required|integer|min:1',
-        ]);
+        try {
+            $data = $request->validate([
+                'depart' => 'required|string|max:100',
+                'destination' => 'required|string|max:100',
+                'date' => 'required|date|after_or_equal:today',
+                'price' => 'required|numeric|min:0',
+                'available_seats' => 'required|integer|min:1',
+            ]);
 
-        $this->trajetRepo->update($id, $data);
-        return redirect()->back()->with('success', 'Trajet modifié avec succès!');
+            $this->trajetRepo->update($id, $data);
+
+            if ($request->expectsJson()) {
+                return response()->json(['success' => true]);
+            }
+
+            return redirect()->back()->with('success', 'Trajet modifié avec succès!');
+        } catch (\Exception $e) {
+            if ($request->expectsJson()) {
+                return response()->json(['success' => false, 'message' => $e->getMessage()], 422);
+            }
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
     }
 
     public function destroy($id)
     {
-        $this->trajetRepo->destroy($id);
-        return redirect()->back()->with('success', 'Trajet supprimé avec succès!');
+        try {
+            $this->trajetRepo->destroy($id);
+            return redirect()->back()->with('success', 'Trajet supprimé avec succès!');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
     }
 
     public function search(Request $request)
