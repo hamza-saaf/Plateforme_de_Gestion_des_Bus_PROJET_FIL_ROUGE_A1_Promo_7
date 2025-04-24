@@ -1,12 +1,19 @@
 <header class="bg-white shadow">
     <div class="px-4 py-4 sm:px-6 md:px-8 flex justify-between items-center">
-        <h1 class="text-xl font-bold text-gray-900" id="headerTitle">
-            <span data-tab="dashboard" class="tab-title hidden">Tableau de bord</span>
-            <span data-tab="users" class="tab-title hidden">Gestion des utilisateurs</span>
-            <span data-tab="routes" class="tab-title hidden">Gestion des trajets</span>
-            <span data-tab="bookings" class="tab-title hidden">Réservations</span>
-            <span data-tab="stats" class="tab-title hidden">Statistiques</span>
-            <span data-tab="realtime" class="tab-title hidden">Monitoring en temps réel</span>
+        <h1 class="text-xl font-bold text-gray-900">
+            @if(request()->routeIs('admin.dashboard'))
+                Tableau de bord
+            @elseif(request()->routeIs('admin.users.*'))
+                Gestion des utilisateurs
+            @elseif(request()->routeIs('admin.trajets.*'))
+                Gestion des trajets
+            @elseif(request()->routeIs('admin.bookings.*'))
+                Réservations
+            @elseif(request()->routeIs('admin.statistics'))
+                Statistiques
+            @elseif(request()->routeIs('admin.realtime'))
+                Monitoring en temps réel
+            @endif
         </h1>
 
         <div class="flex items-center">

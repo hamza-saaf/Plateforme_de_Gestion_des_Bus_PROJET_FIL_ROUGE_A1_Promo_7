@@ -7,6 +7,7 @@ use App\Models\Bus;
 use App\Models\Booking;
 use App\Models\Alert;
 use App\Models\Route;
+use App\Models\Trajet;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -62,6 +63,9 @@ class StatistiqueController extends Controller
             ->limit(5)
             ->get();
 
+        // Get all trajets for the admin dashboard
+        $trajets = Trajet::orderBy('date', 'asc')->get();
+
         return view('Admin.dashboard', compact(
             'activeUsers',
             'userGrowth',
@@ -72,7 +76,8 @@ class StatistiqueController extends Controller
             'activeAlerts',
             'newAlerts',
             'weeklyReservations',
-            'popularDestinations'
+            'popularDestinations',
+            'trajets'  // Add trajets to the view
         ));
     }
 }
