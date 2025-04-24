@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TrajetController;
+use App\Http\Controllers\StatistiqueController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,6 +26,5 @@ Route::get('login', function () {
 Route::get('trajetsPopulaires', function () {
     return view('trajetsPopulaires');
 })->name('trajetsPopulaires');
-Route::get('dashboard', function () {
-    return view('Admin.dashboard');
-})->name('dashboard');
+Route::get('dashboard', [App\Http\Controllers\StatistiqueController::class, 'getStatistics'])->name('dashboard');
+Route::get('/admin/statistiques', [StatistiqueController::class, 'getStatistics'])->name('admin.statistics');
