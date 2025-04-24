@@ -98,11 +98,10 @@
                     <p class="text-xl mb-8">Planifiez, réservez et gérez vos trajets en un clic. BusFlow rend vos
                         voyages plus faciles et plus agréables.</p>
                     <div class="flex space-x-4">
-                        <a href="search"
+                        <a href="{{ route('search') }}"
                             class="px-6 py-3 bg-white text-slate-700 hover:bg-gray-100 rounded-lg font-medium flex items-center">
                             <i class="fas fa-search mr-2"></i> Chercher un trajet
                         </a>
-                        {{-- {{ route('register') }} --}}
                         <a href=""
                             class="px-6 py-3 bg-transparent border-2 border-white text-white hover:bg-slate-800 rounded-lg font-medium flex items-center">
                             <i class="fas fa-user-plus mr-2"></i> Créer un compte

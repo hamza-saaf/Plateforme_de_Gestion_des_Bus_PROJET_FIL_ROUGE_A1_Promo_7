@@ -18,6 +18,8 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
+Route::get('/search', [TrajetController::class, 'search'])->name('search');
+
 Route::get('login', function () {
     return view('login');
 })->name('login');
@@ -35,13 +37,13 @@ Route::prefix('trips')->name('trips.')->group(function () {
     Route::get('/{trip}/book', [TrajetController::class, 'book'])->name('book');
 });
 
-// Admin Routes
+// Admin
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [StatistiqueController::class, 'getStatistics'])->name('dashboard');
     Route::get('/statistics', [StatistiqueController::class, 'getStatistics'])->name('statistics');
     Route::get('/realtime', [RealtimeController::class, 'index'])->name('realtime');
     
-    // User Management Routes
+    // User 
     Route::prefix('users')->name('users.')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('index');
         Route::get('/create', [UserController::class, 'create'])->name('create');

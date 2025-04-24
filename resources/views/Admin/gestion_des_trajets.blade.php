@@ -144,7 +144,6 @@
         document.getElementById('modalTitle').textContent = 'Ajouter un trajet';
         document.getElementById('trajetForm').reset();
         document.getElementById('trajetForm').action = "{{ route('admin.trajets.store') }}";
-        document.getElementById('trajetForm').method = "POST";
         removeMethodField();
     }
 
@@ -161,34 +160,29 @@
         openModal();
         document.getElementById('modalTitle').textContent = 'Modifier le trajet';
         
-        fetch(`/admin/trajets/${id}/edit`, {
-            headers: {
-                'Accept': 'application/json',
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('depart').value = data.depart;
-            document.getElementById('destination').value = data.destination;
-            document.getElementById('date').value = data.date;
-            document.getElementById('price').value = data.price;
-            document.getElementById('available_seats').value = data.available_seats;
-            
-            const form = document.getElementById('trajetForm');
-            form.action = `/admin/trajets/${id}`;
-            
-            removeMethodField();
-            const methodField = document.createElement('input');
-            methodField.type = 'hidden';
-            methodField.name = '_method';
-            methodField.value = 'PUT';
-            form.appendChild(methodField);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Une erreur est survenue lors de la récupération des données');
-        });
+        fetch(`/admin/trajets/${id}/edit`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('depart').value = data.depart;
+                document.getElementById('destination').value = data.destination;
+                document.getElementById('date').value = data.date;
+                document.getElementById('price').value = data.price;
+                document.getElementById('available_seats').value = data.available_seats;
+                
+                const form = document.getElementById('trajetForm');
+                form.action = `/admin/trajets/${id}`;
+                
+                removeMethodField();
+                const methodField = document.createElement('input');
+                methodField.type = 'hidden';
+                methodField.name = '_method';
+                methodField.value = 'PUT';
+                form.appendChild(methodField);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Une erreur est survenue lors de la récupération des données');
+            });
     }
 
     function deleteTrajet(id) {
@@ -214,17 +208,21 @@
         }
     }
 
-    // Add event listener for form submission
+    // Form submission handler
     $('#trajetForm').submit(function(e) {
         e.preventDefault();
-        
-        // Reset error messages
         $('.error-message').text('');
 
+        const url = this.action;
+        const method = $('input[name="_method"]').val() || 'POST';
+
         $.ajax({
-            url: '/admin/trajets',
-            method: 'POST',
+            url: url,
+            method: 'POST', // Always POST, method is specified in form data
             data: $(this).serialize(),
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
             success: function(response) {
                 if(response.success) {
                     location.reload();
@@ -232,8 +230,7 @@
             },
             error: function(xhr) {
                 if(xhr.status === 422) {
-                    var errors = xhr.responseJSON.errors;
-                    // Display validation errors
+                    const errors = xhr.responseJSON.errors;
                     $.each(errors, function(field, messages) {
                         $(`[name="${field}"]`).next('.error-message').text(messages[0]);
                     });
