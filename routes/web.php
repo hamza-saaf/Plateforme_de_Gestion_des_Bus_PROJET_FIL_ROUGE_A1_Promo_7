@@ -2,26 +2,76 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TrajetController;
+use App\Http\Controllers\StatistiqueController;
+use App\Http\Controllers\BookingController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\RealtimeController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
 */
 
+// Public Routes
 Route::get('/', function () {
     return view('home');
-});
-Route::get('trajets', [TrajetController::class, 'index']);
-Route::post('trajets', [TrajetController::class, 'store']);
-Route::get('search', [TrajetController::class, 'search'])->name('search');
+})->name('home');
+
+Route::get('/search', [TrajetController::class, 'search'])->name('search');
+
 Route::get('login', function () {
     return view('login');
 })->name('login');
+
+Route::get('register', function () {
+    return view('register');
+})->name('register');
+
+// Trips Related Routes
+Route::prefix('trips')->name('trips.')->group(function () {
+    Route::get('/', [TrajetController::class, 'index'])->name('index');
+    Route::get('/popular', [TrajetController::class, 'popular'])->name('popular');
+    Route::get('/search', [TrajetController::class, 'search'])->name('search');
+    Route::get('/{trip}', [TrajetController::class, 'show'])->name('show');
+    Route::get('/{trip}/book', [TrajetController::class, 'book'])->name('book');
+});
+
+// Admin
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', [StatistiqueController::class, 'getStatistics'])->name('dashboard');
+    Route::get('/statistics', [StatistiqueController::class, 'getStatistics'])->name('statistics');
+    Route::get('/realtime', [RealtimeController::class, 'index'])->name('realtime');
+    
+    // User 
+    Route::prefix('users')->name('users.')->group(function () {
+        Route::get('/', [UserController::class, 'index'])->name('index');
+        Route::get('/create', [UserController::class, 'create'])->name('create');
+        Route::post('/', [UserController::class, 'store'])->name('store');
+        Route::get('/{user}/edit', [UserController::class, 'edit'])->name('edit');
+        Route::put('/{user}', [UserController::class, 'update'])->name('update');
+        Route::delete('/{user}', [UserController::class, 'destroy'])->name('destroy');
+    });
+    
+    // Trajet Management Routes
+    Route::prefix('trajets')->name('trajets.')->group(function () {
+        Route::get('/', [TrajetController::class, 'index'])->name('index');
+        Route::post('/', [TrajetController::class, 'store'])->name('store');
+        Route::get('/{trajet}/edit', [TrajetController::class, 'edit'])->name('edit');
+        Route::put('/{trajet}', [TrajetController::class, 'update'])->name('update');
+        Route::delete('/{trajet}', [TrajetController::class, 'destroy'])->name('destroy');
+    });
+
+    // Booking Management Routes
+    Route::prefix('bookings')->name('bookings.')->group(function () {
+        Route::get('/', [BookingController::class, 'index'])->name('index');
+        Route::get('/{booking}', [BookingController::class, 'show'])->name('show');
+        Route::put('/{booking}', [BookingController::class, 'update'])->name('update');
+        Route::delete('/{booking}', [BookingController::class, 'destroy'])->name('destroy');
+    });
+});
+
+// Redirect trajetsPopulaires to trips.popular for backward compatibility
 Route::get('trajetsPopulaires', function () {
-    return view('trajetsPopulaires');
+    return redirect()->route('trips.popular');
 })->name('trajetsPopulaires');

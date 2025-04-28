@@ -5,11 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BusFlow - Gestion simplifiée des trajets en bus</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e40af',
+                        secondary: '#1e293b'
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Alpine.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.0/cdn.min.js" defer></script>
+    <!-- Flowbite -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.min.css" rel="stylesheet" />
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 
@@ -81,11 +98,10 @@
                     <p class="text-xl mb-8">Planifiez, réservez et gérez vos trajets en un clic. BusFlow rend vos
                         voyages plus faciles et plus agréables.</p>
                     <div class="flex space-x-4">
-                        <a href="search"
+                        <a href="{{ route('search') }}"
                             class="px-6 py-3 bg-white text-slate-700 hover:bg-gray-100 rounded-lg font-medium flex items-center">
                             <i class="fas fa-search mr-2"></i> Chercher un trajet
                         </a>
-                        {{-- {{ route('register') }} --}}
                         <a href=""
                             class="px-6 py-3 bg-transparent border-2 border-white text-white hover:bg-slate-800 rounded-lg font-medium flex items-center">
                             <i class="fas fa-user-plus mr-2"></i> Créer un compte
@@ -501,6 +517,7 @@
                     if (data.html) {
                         document.getElementById('search-results').innerHTML = data.html;
                     } else if (data.errors) {
+                        
                         const errors = Object.values(data.errors).flat().join('\n');
                         console('Validation failed:\n' + errors);
                     }

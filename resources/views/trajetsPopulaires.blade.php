@@ -10,7 +10,7 @@
 </head>
 <body class="bg-gray-50">
     <!-- Navbar -->
-    <nav class="bg-blue-700 border-gray-200 px-4 lg:px-6 py-3 shadow-md">
+    <nav class="bg-green-700 border-gray-200 px-4 lg:px-6 py-3 shadow-md">
         <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
             {{-- {{ route('home') }} --}}
             <a href="" class="flex items-center">
@@ -19,25 +19,25 @@
             </a>
             <div class="flex items-center lg:order-2">
                 @guest
-                    <a href="{{ route('login') }}" class="text-white hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none">Connexion</a>
+                    <a href="{{ route('login') }}" class="text-white hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none">Connexion</a>
                     {{-- {{ route('register') }} --}}
-                    <a href="" class="text-blue-700 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 focus:outline-none">Inscription</a>
+                    <a href="" class="text-green-700 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 focus:outline-none">Inscription</a>
                 @else
                     <div class="flex items-center">
                         {{-- {{ route('dashboard') } --}}
-                        <a href="}" class="text-white hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none">
+                        <a href="}" class="text-white hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none">
                             <i class="fas fa-user-circle mr-2"></i> Mon compte
                         </a>
                         {{-- {{ route('logout') }} --}}
                         <form method="POST" action="">
                             @csrf
-                            <button type="submit" class="text-blue-700 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 focus:outline-none">
+                            <button type="submit" class="text-green-700 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 focus:outline-none">
                                 Déconnexion
                             </button>
                         </form>
                     </div>
                 @endguest
-                <button data-collapse-toggle="mobile-menu-2" type="button" class="inline-flex items-center p-2 ml-1 text-sm text-white rounded-lg lg:hidden hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-300" aria-controls="mobile-menu-2" aria-expanded="false">
+                <button data-collapse-toggle="mobile-menu-2" type="button" class="inline-flex items-center p-2 ml-1 text-sm text-white rounded-lg lg:hidden hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-green-300" aria-controls="mobile-menu-2" aria-expanded="false">
                     <span class="sr-only">Ouvrir le menu</span>
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
                     <svg class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
@@ -47,21 +47,21 @@
                 <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
                     <li>
                         {{-- {{ route('home') }} --}}
-                        <a href="" class="block py-2 pr-4 pl-3 text-white hover:bg-blue-800 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-200 lg:p-0">Accueil</a>
+                        <a href="" class="block py-2 pr-4 pl-3 text-white hover:bg-green-800 lg:hover:bg-transparent lg:border-0 lg:hover:text-green-200 lg:p-0">Accueil</a>
                     </li>
                     <li>
                         {{-- {{ route('trips.popular') }} --}}
-                        <a href="" class="block py-2 pr-4 pl-3 text-white border-b border-blue-600 lg:border-0 lg:hover:text-blue-200 lg:p-0" aria-current="page">Trajets populaires</a>
+                        <a href="" class="block py-2 pr-4 pl-3 text-white border-b border-green-600 lg:border-0 lg:hover:text-green-200 lg:p-0" aria-current="page">Trajets populaires</a>
                     </li>
                     <li>
                         {{-- {{ route('trips.index') }} --}}
-                        <a href="" class="block py-2 pr-4 pl-3 text-white hover:bg-blue-800 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-200 lg:p-0">Tous les trajets</a>
+                        <a href="" class="block py-2 pr-4 pl-3 text-white hover:bg-green-800 lg:hover:bg-transparent lg:border-0 lg:hover:text-green-200 lg:p-0">Tous les trajets</a>
                     </li>
                     <li>
-                        <a href="#" class="block py-2 pr-4 pl-3 text-white hover:bg-blue-800 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-200 lg:p-0">Services</a>
+                        <a href="#" class="block py-2 pr-4 pl-3 text-white hover:bg-green-800 lg:hover:bg-transparent lg:border-0 lg:hover:text-green-200 lg:p-0">Services</a>
                     </li>
                     <li>
-                        <a href="#" class="block py-2 pr-4 pl-3 text-white hover:bg-blue-800 lg:hover:bg-transparent lg:border-0 lg:hover:text-blue-200 lg:p-0">Contact</a>
+                        <a href="#" class="block py-2 pr-4 pl-3 text-white hover:bg-green-800 lg:hover:bg-transparent lg:border-0 lg:hover:text-green-200 lg:p-0">Contact</a>
                     </li>
                 </ul>
             </div>
@@ -69,11 +69,11 @@
     </nav>
 
     <!-- Page header -->
-    <header class="bg-blue-700 py-10">
+    <header class="bg-green-700 py-10">
         <div class="max-w-screen-xl mx-auto px-4">
             <div class="text-center">
                 <h1 class="text-3xl font-bold text-white">Trajets Populaires</h1>
-                <p class="mt-4 text-blue-100 max-w-3xl mx-auto">Découvrez les itinéraires les plus appréciés par nos voyageurs. Réservez dès maintenant pour garantir votre place!</p>
+                <p class="mt-4 text-green-100 max-w-3xl mx-auto">Découvrez les itinéraires les plus appréciés par nos voyageurs. Réservez dès maintenant pour garantir votre place!</p>
             </div>
         </div>
     </header>
@@ -89,35 +89,35 @@
                         <label for="departure" class="block mb-2 text-sm font-medium text-gray-700">Départ</label>
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                <i class="fas fa-map-marker-alt text-blue-600"></i>
+                                <i class="fas fa-map-marker-alt text-green-600"></i>
                             </div>
                             {{-- {{ request('departure') }} --}}
-                            <input type="text" id="departure" name="departure" value="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5" placeholder="Ville de départ">
+                            <input type="text" id="departure" name="departure" value="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full pl-10 p-2.5" placeholder="Ville de départ">
                         </div>
                     </div>
                     <div>
                         <label for="destination" class="block mb-2 text-sm font-medium text-gray-700">Destination</label>
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                <i class="fas fa-map-marker text-blue-600"></i>
+                                <i class="fas fa-map-marker text-green-600"></i>
                             </div>
                             {{-- {{ request('destination') }} --}}
-                            <input type="text" id="destination" name="destination" value="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5" placeholder="Ville d'arrivée">
+                            <input type="text" id="destination" name="destination" value="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full pl-10 p-2.5" placeholder="Ville d'arrivée">
                         </div>
                     </div>
                     <div>
                         <label for="date" class="block mb-2 text-sm font-medium text-gray-700">Date</label>
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                <i class="fas fa-calendar text-blue-600"></i>
+                                <i class="fas fa-calendar text-green-600"></i>
                             </div>
                             {{-- {{ request('date') }} --}}
-                            <input type="date" id="date" name="date" value="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5">
+                            <input type="date" id="date" name="date" value="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full pl-10 p-2.5">
                         </div>
                     </div>
                     <div>
                         <label for="sort" class="block mb-2 text-sm font-medium text-gray-700">Trier par</label>
-                        <select id="sort" name="sort" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                        <select id="sort" name="sort" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5">
                             <option value="popularity" {{ request('sort') == 'popularity' ? 'selected' : '' }}>Popularité</option>
                             <option value="price_asc" {{ request('sort') == 'price_asc' ? 'selected' : '' }}>Prix croissant</option>
                             <option value="price_desc" {{ request('sort') == 'price_desc' ? 'selected' : '' }}>Prix décroissant</option>
@@ -125,7 +125,7 @@
                         </select>
                     </div>
                     <div class="flex items-end">
-                        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-5 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-300">
+                        <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2.5 px-5 rounded-lg focus:outline-none focus:ring-4 focus:ring-green-300">
                             <i class="fas fa-filter mr-2"></i> Filtrer
                         </button>
                     </div>
@@ -158,7 +158,7 @@
                                 <h3 class="text-lg font-semibold text-gray-800">{{ $route->departure }} - {{ $route->destination }}</h3>
                                 <p class="text-gray-600">{{ $route->duration }} min</p>
                             </div>
-                            <div class="text-xl font-bold text-blue-600">{{ $route->price }} €</div>
+                            <div class="text-xl font-bold text-green-600">{{ $route->price }} €</div>
                         </div>
                         <div class="flex justify-between text-sm text-gray-500 mb-4">
                             <div>
@@ -167,7 +167,7 @@
                                 <div class="text-xs text-gray-400">{{ $route->departure_date }}</div>
                             </div>
                             <div class="text-center flex flex-col items-center justify-center">
-                                <i class="fas fa-bus text-blue-600 mb-1"></i>
+                                <i class="fas fa-bus text-green-600 mb-1"></i>
                                 <div class="w-16 h-px bg-gray-300"></div>
                                 <span class="text-xs">{{ $route->distance }} km</span>
                             </div>
@@ -183,14 +183,14 @@
                                 <span class="text-gray-600">{{ $route->available_seats }} places disponibles</span>
                             </div>
                             <div class="flex space-x-2">
-                                <a href="{{ route('trips.show', $route->id) }}" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm">Détails</a>
+                                <a href="{{ route('trips.show', $route->id) }}" class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg text-sm">Détails</a>
                                 <a href="{{ route('trips.book', $route->id) }}" class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg text-sm">Réserver</a>
                             </div>
                         </div>
                     </div>
                     <div class="bg-gray-50 px-5 py-2 border-t border-gray-200 flex justify-between items-center">
                         <div class="flex items-center text-sm">
-                            <i class="fas fa-users text-blue-600 mr-2"></i>
+                            <i class="fas fa-users text-green-600 mr-2"></i>
                             <span>{{ $route->bookings_count }} voyageurs</span>
                         </div>
                         <div class="flex items-center">
@@ -221,7 +221,7 @@
                 <h3 class="text-xl font-medium text-gray-800 mb-2">Aucun trajet trouvé</h3>
                 <p class="text-gray-600 mb-6">Aucun trajet ne correspond à vos critères de recherche. Essayez de modifier vos filtres.</p>
                 {{-- {{ route('trips.popular') }} --}}
-                <a href="" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                <a href="" class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">
                     Réinitialiser les filtres
                 </a>
             </div>
@@ -252,14 +252,14 @@
     </section>
 
     <!-- Newsletter -->
-    <section class="py-10 bg-blue-700 px-4">
+    <section class="py-10 bg-green-700 px-4">
         <div class="max-w-screen-xl mx-auto text-center">
             <h2 class="text-2xl font-bold mb-4 text-white">Recevez nos meilleures offres</h2>
-            <p class="text-blue-100 mb-8 max-w-2xl mx-auto">Inscrivez-vous à notre newsletter pour être informé des promotions exclusives et des nouveaux trajets populaires.</p>
+            <p class="text-green-100 mb-8 max-w-2xl mx-auto">Inscrivez-vous à notre newsletter pour être informé des promotions exclusives et des nouveaux trajets populaires.</p>
             
             <form class="flex flex-col md:flex-row gap-4 max-w-md mx-auto">
-                <input type="email" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Votre adresse email" required>
-                <button type="submit" class="bg-blue-900 hover:bg-blue-800 text-white font-medium py-2.5 px-5 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-300 whitespace-nowrap">S'abonner</button>
+                <input type="email" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5" placeholder="Votre adresse email" required>
+                <button type="submit" class="bg-green-900 hover:bg-green-800 text-white font-medium py-2.5 px-5 rounded-lg focus:outline-none focus:ring-4 focus:ring-green-300 whitespace-nowrap">S'abonner</button>
             </form>
         </div>
     </section>

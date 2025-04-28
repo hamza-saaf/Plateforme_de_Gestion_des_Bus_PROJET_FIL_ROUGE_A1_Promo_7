@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Trajet;
+use Illuminate\Support\Facades\DB;
 
 class TrajetRepository implements TrajetRepositoryInterface
 {
@@ -38,6 +39,14 @@ class TrajetRepository implements TrajetRepositoryInterface
         return Trajet::where('depart', 'like', "%{$filters['depart']}%")
             ->where('destination', 'like', "%{$filters['destination']}%")
             ->whereDate('date', $filters['date'])
+            ->get();
+    }
+
+    public function getPopularRoutes()
+    {
+        return Trajet::where('date', '>=', now())
+            ->orderBy('date')
+            ->take(6)
             ->get();
     }
 }
