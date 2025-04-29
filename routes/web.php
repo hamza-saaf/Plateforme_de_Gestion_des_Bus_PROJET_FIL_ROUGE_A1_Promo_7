@@ -6,6 +6,7 @@ use App\Http\Controllers\StatistiqueController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RealtimeController;
+use App\Http\Controllers\ReservationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,7 @@ Route::prefix('trips')->name('trips.')->group(function () {
     Route::get('/search', [TrajetController::class, 'search'])->name('search');
     Route::get('/{trip}', [TrajetController::class, 'show'])->name('show');
     Route::get('/{trip}/book', [TrajetController::class, 'book'])->name('book');
+    Route::post('/{trip}/reserve', [ReservationController::class, 'store'])->name('reserve');
 });
 
 // Admin

@@ -42,7 +42,7 @@
                 </div>
 
                 <div class="mt-4 pt-4 border-t border-gray-200">
-                    <a href=""
+                    <a href="{{ route('trips.show', $trajet->id) }}"
                         class="block w-full bg-green-600 text-white text-center py-2 px-4 rounded-md hover:bg-green-700 transition-colors duration-300 font-medium">
                         Voir les détails
                     </a>

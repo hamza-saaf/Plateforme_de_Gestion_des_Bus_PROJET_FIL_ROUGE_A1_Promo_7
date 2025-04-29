@@ -21,4 +21,9 @@ class Trajet extends Model
         'date' => 'date',
         'price' => 'decimal:2'
     ];
+
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
 }
