@@ -68,7 +68,7 @@
                             aria-current="page">Accueil</a>
                     </li>
                     <li>
-                        <a href="#"
+                        <a href="{{ route('trajets') }}"
                             class="block py-2 pr-4 pl-3 text-white border-b border-gray-100 hover:bg-slate-800 lg:hover:bg-transparent lg:border-0 lg:hover:text-slate-200 lg:p-0">Trajets</a>
                     </li>
                     <li>
@@ -177,19 +177,6 @@
     <div id="search-results" class="searchBox  max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
         @include('trajet_results', ['trajets' => $trajets ?? []])
     </div>
-    {{-- <div class="Resutat_de_recherch">
-            <h3>Resultat</h3>
-            @foreach ($trajets as $trajet)
-                <div>
-                    <ul>
-                        <li>Depart:{{ $trajet->depart }}</li>
-                        <li>Destination:{{ $trajet->destination }}</li>
-                        <li>Date:{{ $trajet->date }}</li>
-                        <li>Prix:{{ $trajet->price }} DH</li>
-                    </ul>
-                </div>
-            @endforeach
-        </div> --}}
     <!-- Featured Routes -->
     <section class="py-12 bg-gray-50 px-4">
         <div class="max-w-screen-xl mx-auto">

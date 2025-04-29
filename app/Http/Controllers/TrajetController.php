@@ -124,4 +124,10 @@ class TrajetController extends Controller
         $trajet = $this->trajetRepo->find($id);
         return view('trajets.booking', compact('trajet'));
     }
+
+    public function trajets()
+    {
+        $trajets = $this->trajetRepo->all();
+        return view('trajets', compact('trajets'));
+    }
 }

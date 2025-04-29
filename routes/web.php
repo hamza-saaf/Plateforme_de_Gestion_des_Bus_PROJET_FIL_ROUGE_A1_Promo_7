@@ -5,7 +5,7 @@ use App\Http\Controllers\TrajetController;
 use App\Http\Controllers\StatistiqueController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\RealtimeController;
+// use App\Http\Controllers\RealtimeController;
 use App\Http\Controllers\ReservationController;
 
 /*
@@ -13,6 +13,8 @@ use App\Http\Controllers\ReservationController;
 | Web Routes
 |--------------------------------------------------------------------------
 */
+
+Route::get('/trajets', [TrajetController::class, 'trajets'])->name('trajets');
 
 // Public Routes
 Route::get('/', function () {
@@ -43,7 +45,7 @@ Route::prefix('trips')->name('trips.')->group(function () {
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [StatistiqueController::class, 'getStatistics'])->name('dashboard');
     Route::get('/statistics', [StatistiqueController::class, 'getStatistics'])->name('statistics');
-    Route::get('/realtime', [RealtimeController::class, 'index'])->name('realtime');
+    // Route::get('/realtime', [RealtimeController::class, 'index'])->name('realtime');
     
     // User 
     Route::prefix('users')->name('users.')->group(function () {
@@ -63,6 +65,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::put('/{trajet}', [TrajetController::class, 'update'])->name('update');
         Route::delete('/{trajet}', [TrajetController::class, 'destroy'])->name('destroy');
     });
+
 
     // Booking Management Routes
     Route::prefix('bookings')->name('bookings.')->group(function () {
