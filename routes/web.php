@@ -7,6 +7,7 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\UserController;
 // use App\Http\Controllers\RealtimeController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -80,3 +81,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 Route::get('trajetsPopulaires', function () {
     return redirect()->route('trips.popular');
 })->name('trajetsPopulaires');
+
+
+Route::get('/checkout', [PaymentController::class, 'checkoutForm'])->name('checkout.form');
+Route::post('/checkout', [PaymentController::class, 'processPayment'])->name('checkout.process');
