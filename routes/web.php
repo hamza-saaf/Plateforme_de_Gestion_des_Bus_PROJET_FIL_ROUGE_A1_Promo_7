@@ -8,12 +8,76 @@ use App\Http\Controllers\UserController;
 // use App\Http\Controllers\RealtimeController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\SocialAuthController;
 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
 */
+
+// Authentication Routes
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+    Route::post('/register', [AuthController::class, 'register']);
+
+    // Password Reset Routes
+    Route::get('forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])
+        ->name('password.request');
+    Route::post('forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])
+        ->name('password.email');
+    Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showResetForm'])
+        ->name('password.reset');
+    Route::post('reset-password', [ForgotPasswordController::class, 'reset'])
+        ->name('password.update');
+
+    // Social Authentication Routes
+    Route::get('auth/google', [SocialAuthController::class, 'redirectToGoogle'])->name('login.google');
+    Route::get('auth/google/callback', [SocialAuthController::class, 'handleGoogleCallback']);
+
+    Route::get('auth/facebook', [SocialAuthController::class, 'redirectToFacebook'])->name('login.facebook');
+    Route::get('auth/facebook/callback', [SocialAuthController::class, 'handleFacebookCallback']);
+
+    Route::get('auth/apple', [SocialAuthController::class, 'redirectToApple'])->name('login.apple');
+    Route::get('auth/apple/callback', [SocialAuthController::class, 'handleAppleCallback']);
+});
+
+Route::middleware('auth')->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    
+    // Protected routes for different roles
+    Route::middleware('role:admin')->group(function () {
+        Route::get('/admin/dashboard', function () {
+            return view('admin.dashboard');
+        })->name('admin.dashboard');
+    });
+
+    Route::middleware('role:traveler')->group(function () {
+        Route::get('/bookings', function () {
+            return view('traveler.bookings');
+        })->name('bookings');
+    });
+
+    // Profile Routes
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.update-password');
+});
+
+// Public routes accessible to all users including visitors
+Route::get('/', function () {
+    return view('welcome');
+})->name('home');
+
+Route::get('/trajets', function () {
+    return view('trajets.index');
+})->name('trajets');
 
 Route::get('/trajets', [TrajetController::class, 'trajets'])->name('trajets');
 
@@ -23,14 +87,6 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/search', [TrajetController::class, 'search'])->name('search');
-
-Route::get('login', function () {
-    return view('login');
-})->name('login');
-
-Route::get('register', function () {
-    return view('register');
-})->name('register');
 
 // Trips Related Routes
 Route::prefix('trips')->name('trips.')->group(function () {
@@ -83,5 +139,10 @@ Route::get('trajetsPopulaires', function () {
 })->name('trajetsPopulaires');
 
 
-Route::get('/checkout', [PaymentController::class, 'checkoutForm'])->name('checkout.form');
-Route::post('/checkout', [PaymentController::class, 'processPayment'])->name('checkout.process');
+Route::get('checkout', function () {
+    return view('voyageur.checkout');
+})->name('checkout');
+
+Route::get('/checkout/{id}', [PaymentController::class, 'show'])->name('checkout');
+Route::post('/payment/create-intent/{id}', [PaymentController::class, 'createPaymentIntent'])->name('payment.create-intent');
+Route::post('/payment/process/{id}', [PaymentController::class, 'processPayment'])->name('payment.process');

@@ -30,6 +30,8 @@ class TrajetController extends Controller
     {
         $trajet = $this->trajetRepo->find($id);
         return view('voyageur.trip_details', compact('trajet'));
+        view('voyageur.checkout', compact('trajet'))
+        ;
     }
 
     public function store(Request $request)

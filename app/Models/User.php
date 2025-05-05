@@ -14,11 +14,6 @@ class User extends Authenticatable
 {
     use Billable, HasApiTokens, HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'name',
         'email',
@@ -26,43 +21,74 @@ class User extends Authenticatable
         'role',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
 
-    /**
-     * Set the user's password.
-     *
-     * @param string $value
-     * @return void
-     */
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'user_role');
+    }
+
+    public function hasRole($role)
+    {
+        if (is_string($role)) {
+            return $this->roles->contains('slug', $role);
+        }
+        return $this->roles->contains($role);
+    }
+
+    public function hasAnyRole($roles)
+    {
+        if (is_string($roles)) {
+            $roles = explode('|', $roles);
+        }
+        
+        return $this->roles->whereIn('slug', $roles)->count() > 0;
+    }
+
+    public function hasPermission($permission)
+    {
+        return $this->roles->flatMap(function ($role) {
+            return $role->permissions;
+        })->contains('slug', $permission);
+    }
+
+    public function assignRole($role)
+    {
+        if (is_string($role)) {
+            $role = Role::where('slug', $role)->firstOrFail();
+        }
+        
+        if (!$this->hasRole($role)) {
+            $this->roles()->attach($role);
+        }
+        
+        return $this;
+    }
+
+    public function removeRole($role)
+    {
+        if (is_string($role)) {
+            $role = Role::where('slug', $role)->firstOrFail();
+        }
+        
+        $this->roles()->detach($role);
+        return $this;
+    }
+
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = Hash::make($value);
     }
 
-    /**
-     * Check if the user is an admin
-     *
-     * @return bool
-     */
     public function isAdmin()
     {
-        return $this->role === 'admin';
+        return $this->hasRole('admin');
     }
 }
