@@ -105,21 +105,24 @@
 
                 <div class="mt-6 grid grid-cols-3 gap-3">
                     <div>
-                        <a href="{{ route('register.google') }}" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                        {{-- {{ route('register.google') }} --}}
+                        <a href="" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
                             <span class="sr-only">S'inscrire avec Google</span>
                             <i class="fab fa-google"></i>
                         </a>
                     </div>
 
                     <div>
-                        <a href="{{ route('register.facebook') }}" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                        {{-- {{ route('register.facebook') }} --}}
+                        <a href="" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
                             <span class="sr-only">S'inscrire avec Facebook</span>
                             <i class="fab fa-facebook"></i>
                         </a>
                     </div>
 
                     <div>
-                        <a href="{{ route('register.apple') }}" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                        {{-- {{ route('register.apple') }}ph --}}
+                        <a href="" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
                             <span class="sr-only">S'inscrire avec Apple</span>
                             <i class="fab fa-apple"></i>
                         </a>

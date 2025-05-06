@@ -41,7 +41,7 @@
 
                 <a href="{{ route('login') }}"
                     class="text-white hover:bg-slate-800 focus:ring-4 focus:ring-slate-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none">Connexion</a>
-                <a href=""
+                <a href="{{route('register')}}"
                     class="text-slate-700 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-slate-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 focus:outline-none">Inscription</a>
                 <button data-collapse-toggle="mobile-menu-2" type="button"
                     class="inline-flex items-center p-2 ml-1 text-sm text-white rounded-lg lg:hidden hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-300"

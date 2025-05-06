@@ -34,10 +34,7 @@ class AuthController extends Controller
         ]);
 
         // Assign default 'traveler' role to new users
-        $travelerRole = Role::where('slug', 'traveler')->first();
-        if ($travelerRole) {
-            $user->assignRole($travelerRole);
-        }
+        $user->assignRole('traveler');
 
         Auth::login($user);
 
@@ -60,7 +57,10 @@ class AuthController extends Controller
             $request->session()->regenerate();
             
             // Update last login timestamp
-            Auth::user()->update(['last_login_at' => now()]);
+            $user = Auth::user();
+            if ($user instanceof \App\Models\User) {
+                $user->update(['last_login_at' => now()]);
+            }
 
             // Redirect based on role
             if (Auth::user()->hasRole('admin')) {
