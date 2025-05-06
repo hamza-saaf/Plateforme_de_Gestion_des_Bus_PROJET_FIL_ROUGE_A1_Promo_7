@@ -5,13 +5,10 @@ use App\Http\Controllers\TrajetController;
 use App\Http\Controllers\StatistiqueController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\UserController;
-// use App\Http\Controllers\RealtimeController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ForgotPasswordController;
-use App\Http\Controllers\SocialAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,26 +22,6 @@ Route::middleware('guest')->group(function () {
     Route::post('/login', [AuthController::class, 'login']);
     Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
     Route::post('/register', [AuthController::class, 'register']);
-
-    // Password Reset Routes
-    Route::get('forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])
-        ->name('password.request');
-    Route::post('forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])
-        ->name('password.email');
-    Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showResetForm'])
-        ->name('password.reset');
-    Route::post('reset-password', [ForgotPasswordController::class, 'reset'])
-        ->name('password.update');
-
-    // Social Authentication Routes
-    Route::get('auth/google', [SocialAuthController::class, 'redirectToGoogle'])->name('login.google');
-    Route::get('auth/google/callback', [SocialAuthController::class, 'handleGoogleCallback']);
-
-    Route::get('auth/facebook', [SocialAuthController::class, 'redirectToFacebook'])->name('login.facebook');
-    Route::get('auth/facebook/callback', [SocialAuthController::class, 'handleFacebookCallback']);
-
-    Route::get('auth/apple', [SocialAuthController::class, 'redirectToApple'])->name('login.apple');
-    Route::get('auth/apple/callback', [SocialAuthController::class, 'handleAppleCallback']);
 });
 
 Route::middleware('auth')->group(function () {
@@ -71,10 +48,6 @@ Route::middleware('auth')->group(function () {
 });
 
 // Public routes accessible to all users including visitors
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
-
 Route::get('/trajets', function () {
     return view('trajets.index');
 })->name('trajets');
@@ -102,7 +75,6 @@ Route::prefix('trips')->name('trips.')->group(function () {
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [StatistiqueController::class, 'getStatistics'])->name('dashboard');
     Route::get('/statistics', [StatistiqueController::class, 'getStatistics'])->name('statistics');
-    // Route::get('/realtime', [RealtimeController::class, 'index'])->name('realtime');
     
     // User 
     Route::prefix('users')->name('users.')->group(function () {

@@ -7,18 +7,6 @@
     <title>BusFlow - Gestion simplifiée des trajets en bus</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#1e40af',
-                        secondary: '#1e293b'
-                    }
-                }
-            }
-        }
-    </script>
     <!-- Alpine.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.0/cdn.min.js" defer></script>
     <!-- Flowbite -->
@@ -38,11 +26,39 @@
                 <img src="{{ asset('img/BusFlow_300_px2.png') }}" alt="iPhone" class="w-60 rounded-sm">
             </a>
             <div class="flex items-center lg:order-2">
-
-                <a href="{{ route('login') }}"
-                    class="text-white hover:bg-slate-800 focus:ring-4 focus:ring-slate-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none">Connexion</a>
-                <a href="{{route('register')}}"
-                    class="text-slate-700 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-slate-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 focus:outline-none">Inscription</a>
+                @guest
+                    <!-- Show for visitors -->
+                    <a href="{{ route('login') }}"
+                        class="text-white hover:bg-slate-800 focus:ring-4 focus:ring-slate-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none">Connexion</a>
+                    <a href="{{route('register')}}"
+                        class="text-slate-700 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-slate-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 focus:outline-none">Inscription</a>
+                @else
+                    <!-- Show for logged in users -->
+                    <div class="flex items-center space-x-3">
+                        <span class="text-white">{{ Auth::user()->name }}</span>
+                        <div class="relative" x-data="{ open: false }">
+                            <button @click="open = !open" class="text-white hover:bg-slate-800 rounded-full p-1">
+                                <i class="fas fa-user-circle text-2xl"></i>
+                            </button>
+                            <div x-show="open" 
+                                @click.away="open = false"
+                                class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1">
+                                <a href="{{ route('profile.show') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                    <i class="fas fa-user mr-2"></i>Mon profil
+                                </a>
+                                <a href="{{ route('bookings') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                    <i class="fas fa-ticket-alt mr-2"></i>Mes réservations
+                                </a>
+                                <form method="POST" action="{{ route('logout') }}" class="border-t">
+                                    @csrf
+                                    <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                        <i class="fas fa-sign-out-alt mr-2"></i>Déconnexion
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                @endguest
                 <button data-collapse-toggle="mobile-menu-2" type="button"
                     class="inline-flex items-center p-2 ml-1 text-sm text-white rounded-lg lg:hidden hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-300"
                     aria-controls="mobile-menu-2" aria-expanded="false">
@@ -63,7 +79,7 @@
             <div class="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2">
                 <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
                     <li>
-                        <a href="#"
+                        <a href="{{ route('home') }}"
                             class="block py-2 pr-4 pl-3 text-white border-b border-slate-600 lg:border-0 lg:hover:text-slate-200 lg:p-0"
                             aria-current="page">Accueil</a>
                     </li>
@@ -102,7 +118,7 @@
                             class="px-6 py-3 bg-white text-slate-700 hover:bg-gray-100 rounded-lg font-medium flex items-center">
                             <i class="fas fa-search mr-2"></i> Chercher un trajet
                         </a>
-                        <a href=""
+                        <a href="{{route('register')}}"
                             class="px-6 py-3 bg-transparent border-2 border-white text-white hover:bg-slate-800 rounded-lg font-medium flex items-center">
                             <i class="fas fa-user-plus mr-2"></i> Créer un compte
                         </a>

@@ -59,7 +59,8 @@
                 </div>
 
                 <div class="text-sm">
-                    <a href="{{ route('password.request') }}" class="font-medium text-slate-600 hover:text-slate-500">
+                    {{-- {{ route('password.request') }} --}}
+                    <a href="" class="font-medium text-slate-600 hover:text-slate-500">
                         Mot de passe oublié ?
                     </a>
                 </div>
@@ -86,21 +87,24 @@
 
                 <div class="mt-6 grid grid-cols-3 gap-3">
                     <div>
-                        <a href="{{ route('login.google') }}" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                        {{-- {{ route('login.google') }} --}}
+                        <a href="" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
                             <span class="sr-only">Se connecter avec Google</span>
                             <i class="fab fa-google"></i>
                         </a>
                     </div>
 
                     <div>
-                        <a href="{{ route('login.facebook') }}" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                        {{-- {{ route('login.facebook') }} --}}
+                        <a href="" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
                             <span class="sr-only">Se connecter avec Facebook</span>
                             <i class="fab fa-facebook"></i>
                         </a>
                     </div>
 
                     <div>
-                        <a href="{{ route('login.apple') }}" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                        {{-- {{ route('login.apple') }} --}}
+                        <a href="" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-lg shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
                             <span class="sr-only">Se connecter avec Apple</span>
                             <i class="fab fa-apple"></i>
                         </a>
