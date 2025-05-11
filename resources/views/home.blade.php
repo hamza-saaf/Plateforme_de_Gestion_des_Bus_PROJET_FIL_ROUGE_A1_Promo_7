@@ -125,7 +125,6 @@
                     </div>
                 </div>
                 <div class="relative hidden md:block">
-                    <img src="/api/placeholder/600/400" alt="Bus moderne" class="rounded-lg shadow-xl">
                     <div class="absolute -bottom-6 -right-6 bg-slate-600 text-white p-4 rounded-lg shadow-lg">
                         <div class="text-lg font-bold">+ de 500</div>
                         <div class="text-sm">Trajets quotidiens</div>

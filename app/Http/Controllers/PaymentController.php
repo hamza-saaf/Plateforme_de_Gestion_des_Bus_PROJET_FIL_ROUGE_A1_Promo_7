@@ -3,98 +3,56 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Trajet;
-use App\Models\Booking;
 use Stripe\Stripe;
-use Stripe\PaymentIntent;
+use Stripe\Customer;
+use Stripe\Charge;
+use App\Models\Reservation;
+use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
 {
-    public function __construct()
-    {
-        Stripe::setApiKey(env('STRIPE_SECRET'));
-    }
-
-    public function show($id)
-    {
-        $trajet = Trajet::findOrFail($id);
-        return view('voyageur.checkout', compact('trajet'));
-    }
-
-    public function createPaymentIntent($id)
+    public function charge(Request $request)
     {
         try {
-            $trajet = Trajet::findOrFail($id);
-            
-            // Create a PaymentIntent with the order amount and currency
-            $paymentIntent = PaymentIntent::create([
-                'amount' => $trajet->price * 100, // Amount in cents
+            // Set Stripe API Key
+            Stripe::setApiKey(env('STRIPE_SECRET'));
+
+            // Get form data
+            $amount = $request->input('amount') * 100; // Convert to cents
+            $email = $request->input('email');
+            $trajet_id = $request->input('trajet_id');
+
+            // Create a new customer in Stripe
+            $customer = Customer::create([
+                'email' => $email,
+                'source' => $request->input('stripeToken'),
+            ]);
+
+            // Process the payment
+            $charge = Charge::create([
+                'customer' => $customer->id,
+                'amount' => $amount,
                 'currency' => 'mad',
-                'automatic_payment_methods' => [
-                    'enabled' => true,
-                ],
+                'description' => "Reservation for trip #$trajet_id",
             ]);
 
-            return response()->json([
-                'clientSecret' => $paymentIntent->client_secret,
+            // Create reservation record
+            $reservation = Reservation::create([
+                'user_id' => Auth::id(),
+                'trajet_id' => $trajet_id,
+                'status' => 'confirmed',
+                'payment_status' => 'paid',
+                'amount' => $amount / 100, // Convert back to regular currency
+                'payment_id' => $charge->id
             ]);
+
+            // Return success response
+            return redirect()->route('trips.show', $trajet_id)
+                           ->with('success', 'Votre paiement a été effectué avec succès et votre place est réservée!');
         } catch (\Exception $e) {
-            return response()->json([
-                'error' => $e->getMessage()
-            ], 500);
-        }
-    }
-
-    public function processPayment(Request $request, $id)
-    {
-        try {
-            $trajet = Trajet::findOrFail($id);
-            
-            // Validate booking details
-            $validated = $request->validate([
-                'email' => 'required|email',
-                'phone' => 'required',
-                'payment_intent_id' => 'required'
-            ]);
-
-            // Verify payment intent status
-            $paymentIntent = PaymentIntent::retrieve($request->payment_intent_id);
-            
-            if ($paymentIntent->status === 'succeeded') {
-                // Create booking record
-                $booking = new Booking([
-                    'trajet_id' => $trajet->id,
-                    'email' => $validated['email'],
-                    'phone' => $validated['phone'],
-                    'amount' => $trajet->price,
-                    'payment_id' => $paymentIntent->id,
-                    'status' => 'confirmed'
-                ]);
-                
-                $booking->save();
-
-                // Update available seats
-                $trajet->decrement('available_seats');
-
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Payment processed successfully',
-                    'booking_id' => $booking->id
-                ]);
-            }
-
-            return response()->json([
-                'success' => false,
-                'message' => 'Payment failed'
-            ], 400);
-
-        } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => $e->getMessage()
-            ], 500);
+            // Handle any errors
+            return redirect()->back()
+                           ->with('error', 'Une erreur est survenue lors du paiement: ' . $e->getMessage());
         }
     }
 }
-
-

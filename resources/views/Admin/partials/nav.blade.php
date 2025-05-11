@@ -25,7 +25,8 @@
             <i class="fas fa-chart-pie mr-3 text-lg"></i>
             Statistiques
         </a>
-        <a href="{{ route('admin.realtime') }}"
+        {{-- {{ route('admin.realtime') }} --}}
+        <a href=""
             class="nav-link flex items-center px-4 py-2 text-sm font-medium rounded-md hover:bg-blue-700 {{ request()->routeIs('admin.realtime') ? 'bg-blue-700' : '' }}">
             <i class="fas fa-clock mr-3 text-lg"></i>
             Temps réel

@@ -9,6 +9,7 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ProfileController;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -110,11 +111,11 @@ Route::get('trajetsPopulaires', function () {
     return redirect()->route('trips.popular');
 })->name('trajetsPopulaires');
 
-
-Route::get('checkout', function () {
-    return view('voyageur.checkout');
-})->name('checkout');
-
-Route::get('/checkout/{id}', [PaymentController::class, 'show'])->name('checkout');
-Route::post('/payment/create-intent/{id}', [PaymentController::class, 'createPaymentIntent'])->name('payment.create-intent');
-Route::post('/payment/process/{id}', [PaymentController::class, 'processPayment'])->name('payment.process');
+// Payment Routes
+Route::get('/charge', function (Request $request) {
+    return view('voyageur.charge', [
+        'amount' => $request->amount,
+        'trajet_id' => $request->trajet_id
+    ]);
+})->name('charge')->middleware('auth');
+Route::post('/charge', [PaymentController::class, 'charge'])->name('charge.post')->middleware('auth');

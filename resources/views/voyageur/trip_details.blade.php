@@ -66,8 +66,14 @@
                         </div>
 
                         <!-- Booking Form -->
-                        <a href="{{ route('checkout', ['id' => $trajet->id]) }}">Réserver votre place</a>
-                       
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-4">Réservation</h3>
+                            <a href="{{ route('charge', ['amount' => $trajet->price, 'trajet_id' => $trajet->id]) }}" 
+                               class="w-full inline-flex justify-center items-center px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                                <i class="fas fa-ticket-alt mr-2"></i>
+                                Réserver votre place - {{ number_format($trajet->price, 2) }} DH
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
