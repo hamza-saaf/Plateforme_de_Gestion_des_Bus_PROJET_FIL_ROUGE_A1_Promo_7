@@ -96,14 +96,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::delete('/{trajet}', [TrajetController::class, 'destroy'])->name('destroy');
     });
 
-
-    // Booking Management Routes
-    Route::prefix('bookings')->name('bookings.')->group(function () {
-        Route::get('/', [BookingController::class, 'index'])->name('index');
-        Route::get('/{booking}', [BookingController::class, 'show'])->name('show');
-        Route::put('/{booking}', [BookingController::class, 'update'])->name('update');
-        Route::delete('/{booking}', [BookingController::class, 'destroy'])->name('destroy');
-    });
 });
 
 // Redirect trajetsPopulaires to trips.popular for backward compatibility
