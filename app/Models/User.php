@@ -21,6 +21,8 @@ class User extends Authenticatable
         'password',
         'role',
         'last_login_at',
+        'phone',      // Add phone number field
+        'address',    // Add address field
     ];
 
     protected $hidden = [

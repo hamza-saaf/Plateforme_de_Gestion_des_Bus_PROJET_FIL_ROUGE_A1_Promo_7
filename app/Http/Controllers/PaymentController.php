@@ -7,10 +7,22 @@ use Stripe\Stripe;
 use Stripe\Customer;
 use Stripe\Charge;
 use App\Models\Reservation;
+use App\Models\Trajet;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
+
 
 class PaymentController extends Controller
 {
+    public function showChargeForm(Request $request)
+    {
+        $amount = $request->amount;
+        $trajet_id = $request->trajet_id;
+        
+        return view('voyageur.charge', compact('amount', 'trajet_id'));
+    }
+
     public function charge(Request $request)
     {
         try {
@@ -21,6 +33,15 @@ class PaymentController extends Controller
             $amount = $request->input('amount') * 100; // Convert to cents
             $email = $request->input('email');
             $trajet_id = $request->input('trajet_id');
+
+            // Validate trajet availability
+            $trajet = Trajet::findOrFail($trajet_id);
+            if ($trajet->available_seats < 1) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Désolé, il n\'y a plus de places disponibles pour ce trajet.'
+                ]);
+            }
 
             // Create a new customer in Stripe
             $customer = Customer::create([
@@ -36,23 +57,48 @@ class PaymentController extends Controller
                 'description' => "Reservation for trip #$trajet_id",
             ]);
 
+            // Generate unique transaction reference
+            $transactionRef = 'BUS-' . strtoupper(Str::random(8));
+
             // Create reservation record
             $reservation = Reservation::create([
                 'user_id' => Auth::id(),
                 'trajet_id' => $trajet_id,
+                'bus_id' => $trajet->bus_id,
+                'full_name' => Auth::user()->name,
+                'email' => $email,
+                'phone_number' => Auth::user()->phone ?? '',
+                'amount_paid' => $amount / 100,
+                'payment_id' => $charge->id,
                 'status' => 'confirmed',
-                'payment_status' => 'paid',
-                'amount' => $amount / 100, // Convert back to regular currency
-                'payment_id' => $charge->id
+                'transaction_reference' => $transactionRef,
+                'reservation_date' => now()
             ]);
 
+            // Update available seats
+            $trajet->decrement('available_seats');
+
             // Return success response
-            return redirect()->route('trips.show', $trajet_id)
-                           ->with('success', 'Votre paiement a été effectué avec succès et votre place est réservée!');
+            return response()->json([
+                'success' => true,
+                'message' => 'Paiement effectué avec succès!',
+                'reservation' => [
+                    'id' => $reservation->id,
+                    'transaction_reference' => $transactionRef,
+                    'amount' => $amount / 100,
+                    'status' => 'confirmed'
+                ]
+            ]);
+
         } catch (\Exception $e) {
-            // Handle any errors
-            return redirect()->back()
-                           ->with('error', 'Une erreur est survenue lors du paiement: ' . $e->getMessage());
+            // Log the error for debugging
+            Log::error('Payment Error: ' . $e->getMessage());
+
+            // Return error response
+            return response()->json([
+                'success' => false,
+                'message' => 'Une erreur est survenue lors du paiement: ' . $e->getMessage()
+            ]);
         }
     }
 }

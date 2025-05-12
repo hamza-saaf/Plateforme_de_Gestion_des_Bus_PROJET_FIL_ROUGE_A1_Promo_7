@@ -33,7 +33,7 @@ class ProfileController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
         ]);
 
-        $user->update($validated);
+        $user->fill($validated)->save();
 
         return redirect()->route('profile.show')
             ->with('success', 'Profil mis à jour avec succès.');
@@ -46,9 +46,9 @@ class ProfileController extends Controller
             'password' => ['required', 'confirmed', 'min:8', 'different:current_password'],
         ]);
 
-        Auth::user()->update([
-            'password' => $validated['password']
-        ]);
+        $user = Auth::user();
+        $user->password = Hash::make($validated['password']);
+        $user->save();
 
         return redirect()->route('profile.show')
             ->with('success', 'Mot de passe mis à jour avec succès.');
