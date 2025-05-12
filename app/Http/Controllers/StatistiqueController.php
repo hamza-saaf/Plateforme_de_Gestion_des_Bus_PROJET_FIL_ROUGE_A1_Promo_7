@@ -26,7 +26,7 @@ class StatistiqueController extends Controller
         // Réservations aujourd'hui
         $todayReservations = Reservation::whereDate('created_at', Carbon::today())->count();
         $yesterdayReservations = Reservation::whereDate('created_at', Carbon::yesterday())->count();
-        $ReservationGrowth = $yesterdayReservations > 0 ? round((($todayReservations - $yesterdayReservations) / $yesterdayReservations) * 100) : 0;
+        $reservationGrowth = $yesterdayReservations > 0 ? round((($todayReservations - $yesterdayReservations) / $yesterdayReservations) * 100) : 0;
 
         // Bus en service
         $activeBuses = Bus::where('status', 'active')->count();
@@ -57,7 +57,7 @@ class StatistiqueController extends Controller
             'ville_arrivee as name',
             DB::raw('COUNT(reservations.id) as count')
         )
-            ->leftJoin('Reservations', 'routes.id', '=', 'Reservations.route_id')
+            ->leftJoin('reservations', 'routes.id', '=', 'reservations.route_id')
             ->groupBy('ville_arrivee')
             ->orderByDesc('count')
             ->limit(5)

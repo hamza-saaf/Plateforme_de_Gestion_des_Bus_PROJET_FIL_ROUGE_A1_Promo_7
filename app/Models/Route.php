@@ -14,8 +14,8 @@ class Route extends Model
         'prix'
     ];
 
-    public function bookings()
+    public function reservations()
     {
-        return $this->hasMany(Booking::class);
+        return $this->hasMany(Reservation::class);
     }
 }
