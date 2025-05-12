@@ -60,14 +60,17 @@ class PaymentController extends Controller
             // Generate unique transaction reference
             $transactionRef = 'BUS-' . strtoupper(Str::random(8));
 
+            // Use phone number from the form
+            $phone_number = $request->input('phone');
+
             // Create reservation record
             $reservation = Reservation::create([
                 'user_id' => Auth::id(),
                 'trajet_id' => $trajet_id,
                 'bus_id' => $trajet->bus_id,
-                'full_name' => Auth::user()->name,
+                'full_name' => $request->input('full_name'),
                 'email' => $email,
-                'phone_number' => Auth::user()->phone ?? '',
+                'phone_number' => $phone_number, // Updated to use form input
                 'amount_paid' => $amount / 100,
                 'payment_id' => $charge->id,
                 'status' => 'confirmed',
