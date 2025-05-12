@@ -510,19 +510,13 @@
             const params = new URLSearchParams(formData).toString();
 
             fetch(form.action + '?' + params, {
-                    headers: {
-                        'X-Requested-With': 'XMLHttpRequest'
-                    }
+                    headers: { 'X-Requested-With': 'XMLHttpRequest' }
                 })
                 .then(res => res.json())
                 .then(data => {
-                    if (data.html) {
-                        document.getElementById('search-results').innerHTML = data.html;
-                    } else if (data.errors) {
-                        
-                        const errors = Object.values(data.errors).flat().join('\n');
-                        console('Validation failed:\n' + errors);
-                    }
+                    const searchResults = document.getElementById('search-results');
+                    searchResults.innerHTML = data.html;
+                    searchResults.querySelector('h2').classList.remove('hidden');
                 });
         });
     </script>
