@@ -37,71 +37,44 @@ class PaymentController extends Controller
             // Validate trajet availability
             $trajet = Trajet::findOrFail($trajet_id);
             if ($trajet->available_seats < 1) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Désolé, il n\'y a plus de places disponibles pour ce trajet.'
-                ]);
+                return response()->json(['message' => 'No seats available'], 400);
             }
 
-            // Create a new customer in Stripe
-            $customer = Customer::create([
-                'email' => $email,
-                'source' => $request->input('stripeToken'),
-            ]);
-
-            // Process the payment
-            $charge = Charge::create([
-                'customer' => $customer->id,
+            // Create a Stripe charge
+            $charge = \Stripe\Charge::create([
                 'amount' => $amount,
-                'currency' => 'mad',
-                'description' => "Reservation for trip #$trajet_id",
+                'currency' => 'usd',
+                'source' => $request->input('stripeToken'),
+                'description' => 'Bus reservation payment',
             ]);
 
-            // Generate unique transaction reference
-            $transactionRef = 'BUS-' . strtoupper(Str::random(8));
+            // Find an available bus for the trajet
+            $bus = $trajet->buses()->where('status', 'available')->first();
+            if (!$bus) {
+                return response()->json(['message' => 'No available bus for this trajet'], 400);
+            }
 
-            // Use phone number from the form
-            $phone_number = $request->input('phone');
-
-            // Create reservation record
+            // Create a reservation
             $reservation = Reservation::create([
                 'user_id' => Auth::id(),
                 'trajet_id' => $trajet_id,
-                'bus_id' => $trajet->bus_id,
+                'bus_id' => $bus->id,
                 'full_name' => $request->input('full_name'),
                 'email' => $email,
-                'phone_number' => $phone_number, // Updated to use form input
-                'amount_paid' => $amount / 100,
+                'phone_number' => $request->input('phone_number'),
+                'amount_paid' => $amount / 100, // Convert back to dollars
                 'payment_id' => $charge->id,
                 'status' => 'confirmed',
-                'transaction_reference' => $transactionRef,
-                'reservation_date' => now()
+                'transaction_reference' => $charge->balance_transaction,
+                'reservation_date' => now(),
             ]);
 
-            // Update available seats
+            // Decrease available seats for the trajet
             $trajet->decrement('available_seats');
 
-            // Return success response
-            return response()->json([
-                'success' => true,
-                'message' => 'Paiement effectué avec succès!',
-                'reservation' => [
-                    'id' => $reservation->id,
-                    'transaction_reference' => $transactionRef,
-                    'amount' => $amount / 100,
-                    'status' => 'confirmed'
-                ]
-            ]);
-
+            return response()->json(['message' => 'Payment successful', 'reservation' => $reservation], 200);
         } catch (\Exception $e) {
-            // Log the error for debugging
-            Log::error('Payment Error: ' . $e->getMessage());
-
-            // Return error response
-            return response()->json([
-                'success' => false,
-                'message' => 'Une erreur est survenue lors du paiement: ' . $e->getMessage()
-            ]);
+            return response()->json(['message' => 'Payment failed', 'error' => $e->getMessage()], 500);
         }
     }
 }
