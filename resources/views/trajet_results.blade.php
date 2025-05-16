@@ -2,7 +2,7 @@
     @foreach ($trajets as $trajet)
         <div class="bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg shadow-lg overflow-hidden border border-gray-300 hover:shadow-2xl transition-shadow duration-300">
             <div class="relative">
-                <img src="{{ asset('img/BusCard.avif') }}" alt="Bus Image" class="w-full h-48 object-cover rounded-t-lg">
+                <img src="{{ asset('img/BusCard.jpg') }}" alt="Bus Image" class="w-full h-54 object-cover rounded-t-lg">
                 <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-40"></div>
                 <div class="absolute bottom-0 left-0 p-4 text-white">
                     <h3 class="text-lg font-bold flex items-center">

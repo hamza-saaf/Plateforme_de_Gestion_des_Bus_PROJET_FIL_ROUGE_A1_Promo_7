@@ -26,21 +26,20 @@ class PaymentController extends Controller
     public function charge(Request $request)
     {
         try {
-            // Set Stripe API Key
+        
             Stripe::setApiKey(env('STRIPE_SECRET'));
 
-            // Get form data
-            $amount = $request->input('amount') * 100; // Convert to cents
+            $amount = $request->input('amount') * 100;
             $email = $request->input('email');
             $trajet_id = $request->input('trajet_id');
 
-            // Validate trajet availability
+            
             $trajet = Trajet::findOrFail($trajet_id);
             if ($trajet->available_seats < 1) {
                 return response()->json(['message' => 'No seats available'], 400);
             }
 
-            // Create a Stripe charge
+          
             $charge = \Stripe\Charge::create([
                 'amount' => $amount,
                 'currency' => 'usd',
@@ -48,13 +47,13 @@ class PaymentController extends Controller
                 'description' => 'Bus reservation payment',
             ]);
 
-            // Find an available bus for the trajet
+            
             $bus = $trajet->buses()->where('status', 'available')->first();
             if (!$bus) {
                 return response()->json(['message' => 'No available bus for this trajet'], 400);
             }
 
-            // Create a reservation
+            
             $reservation = Reservation::create([
                 'user_id' => Auth::id(),
                 'trajet_id' => $trajet_id,
@@ -62,14 +61,14 @@ class PaymentController extends Controller
                 'full_name' => $request->input('full_name'),
                 'email' => $email,
                 'phone_number' => $request->input('phone_number'),
-                'amount_paid' => $amount / 100, // Convert back to dollars
+                'amount_paid' => $amount / 100,
                 'payment_id' => $charge->id,
                 'status' => 'confirmed',
                 'transaction_reference' => $charge->balance_transaction,
                 'reservation_date' => now(),
             ]);
 
-            // Decrease available seats for the trajet
+          
             $trajet->decrement('available_seats');
 
             return response()->json(['message' => 'Payment successful', 'reservation' => $reservation], 200);

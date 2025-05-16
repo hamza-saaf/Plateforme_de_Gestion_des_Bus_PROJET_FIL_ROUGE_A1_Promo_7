@@ -23,7 +23,7 @@
     <nav class="bg-slate-500 border-gray-200 px-4 lg:px-6 py-3 shadow-md">
         <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
             <a href="/" class="flex items-center">
-                <img src="{{ asset('img/BusFlow_300_px2.png') }}" alt="iPhone" class="w-60 rounded-sm">
+                <img src="{{ asset('img/BusFlow_300_px2.png') }}" alt="iPhone" class="w-40 rounded-sm">
             </a>
             <div class="flex items-center lg:order-2">
                 @guest
